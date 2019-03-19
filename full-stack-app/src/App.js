@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
   BrowserRouter,
+  Switch,
   Route
 }  from 'react-router-dom';
 //import axios from 'axios';
@@ -26,18 +27,20 @@ class App extends Component {
       <BrowserRouter>
       <div id='root'>
         <Header />
+      <Switch>
         {/* All courses */}
         <Route exact path= '/' render={() => <Courses/>}/>
+        {/* Create Course */}
+       <Route path= '/courses/create' render={() => <CreateCourse/>}/>
+       {/* Update Course */}
+       <Route path= '/courses/:id/update' component= {UpdateCourse}/>
         {/* Course Details */}
-       <Route exact path= 'courses/:id' render={() => <CourseDetails/>}/> 
+       <Route path= '/courses/:id' component= {CourseDetails}/> 
         {/* User Sign In */}
         <Route path='/signin' render={() => <UserSignIn />}/>
         {/* User Sign Up */}
         <Route path= '/signup' render={() => <UserSignUp />} />
-        {/* Create Course */}
-        <Route path= '/courses/create' render={() => <CreateCourse/>}/>
-        {/* Update Course */}
-        <Route path= '/courses/:id/update' render={() => <UpdateCourse />}/>
+      </Switch>
       </div>
       </BrowserRouter>
       

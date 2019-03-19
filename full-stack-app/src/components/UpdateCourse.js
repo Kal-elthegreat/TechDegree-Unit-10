@@ -5,10 +5,39 @@ import axios from 'axios';
 class UpdateCourse extends Component {
 
     state = {
-
+      course: "",
+      user: "",
+      loading: true
     }
 
+    apiGetDetails = () => {
+      axios({
+        method:'get',
+            url: `http://localhost:5000/api/courses/${this.props.match.params.id}`,//${id}, // how do I get selected course._id value into id?
+            auth: {
+              username: 'xxxxxxxxxx',
+              password: 'xxxxxxxxxx'
+            }
+          })
+          .then(response => {
+            console.log(response.data)
+            this.setState({
+              course: response.data,
+              user: response.data.user,
+              loading:false
+            });
+          })       
+          .catch(function(error){
+            console.log(error)
+          })
+        }
+        componentDidMount(){
+          this.apiGetDetails();
+        }
+
     render(){
+      const course = this.state.course
+        const user = this.state.user
         return(
           <div className="bounds course--detail">
             <h1>Update Course</h1>
@@ -17,11 +46,11 @@ class UpdateCourse extends Component {
                 <div className="grid-66">
                   <div className="course--header">
                     <h4 className="course--label">Course</h4>
-                    <div><input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..." defaultValue="Build a Basic Bookcase" /></div>
-                    <p>By Joe Smith</p>
+                    <div><input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..." defaultValue={course.title} /></div>
+                    <p>By {user.firstName} {user.lastName}</p>
                   </div>
                   <div className="course--description">
-                    <div><textarea id="description" name="description" className="" placeholder="Course description..." defaultValue={"High-end furniture projects are great to dream about. But unless you have a well-equipped shop and some serious woodworking experience to draw on, it can be difficult to turn the dream into a reality.\n\nNot every piece of furniture needs to be a museum showpiece, though. Often a simple design does the job just as well and the experience gained in completing it goes a long way toward making the next project even better.\n\nOur pine bookcase, for example, features simple construction and it's designed to be built with basic woodworking tools. Yet, the finished project is a worthy and useful addition to any room of the house. While it's meant to rest on the floor, you can convert the bookcase to a wall-mounted storage unit by leaving off the baseboard. You can secure the cabinet to the wall by screwing through the cabinet cleats into the wall studs.\n\nWe made the case out of materials available at most building-supply dealers and lumberyards, including 1/2 x 3/4-in. parting strip, 1 x 2, 1 x 4 and 1 x 10 common pine and 1/4-in.-thick lauan plywood. Assembly is quick and easy with glue and nails, and when you're done with construction you have the option of a painted or clear finish.\n\nAs for basic tools, you'll need a portable circular saw, hammer, block plane, combination square, tape measure, metal rule, two clamps, nail set and putty knife. Other supplies include glue, nails, sandpaper, wood filler and varnish or paint and shellac.\n\nThe specifications that follow will produce a bookcase with overall dimensions of 10 3/4 in. deep x 34 in. wide x 48 in. tall. While the depth of the case is directly tied to the 1 x 10 stock, you can vary the height, width and shelf spacing to suit your needs. Keep in mind, though, that extending the width of the cabinet may require the addition of central shelf supports."} /></div>
+                    <div><textarea id="description" name="description" className="" placeholder="Course description..." defaultValue={course.description} /></div> {/* default value not showing */}
                   </div>
                 </div>
                 <div className="grid-25 grid-right">
@@ -29,7 +58,7 @@ class UpdateCourse extends Component {
                     <ul className="course--stats--list">
                       <li className="course--stats--list--item">
                         <h4>Estimated Time</h4>
-                        <div><input id="estimatedTime" name="estimatedTime" type="text" className="course--time--input" placeholder="Hours" defaultValue="14 hours" /></div>
+                        <div><input id="estimatedTime" name="estimatedTime" type="text" className="course--time--input" placeholder="Hours" defaultValue={course.estimatedTime} /></div>
                       </li>
                       <li className="course--stats--list--item">
                         <h4>Materials Needed</h4>
@@ -38,7 +67,7 @@ class UpdateCourse extends Component {
                     </ul>
                   </div>
                 </div>
-                <div className="grid-100 pad-bottom"><button className="button" type="submit">Update Course</button><button className="button button-secondary" onClick="event.preventDefault()"><NavLink to='/courses/:id/update'>Cancel</NavLink></button></div> {/* need to write a POST jsx expression for clck handler*/}
+                <div className="grid-100 pad-bottom"><button className="button" type="submit">Update Course</button><button className="button button-secondary" onClick="event.preventDefault()"><NavLink to={`/courses/${course._id}`}>Cancel</NavLink></button></div> {/* need to write a POST jsx expression for clck handler*/}
               </form>
             </div>
           </div>

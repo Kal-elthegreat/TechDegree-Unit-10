@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {NavLink} from 'react-router-dom';
 import axios from 'axios';
 
 class Courses extends Component {
@@ -33,14 +34,14 @@ class Courses extends Component {
       }
 
     render(){
-       console.log(this.state.courses)
+       //console.log(this.state.courses)
         return(
         <div className='bounds'>
-          {this.state.courses.map( course =>
-            <div className="grid-33"><a className="course--module course--link" href="/courses/{course._id}"> {/* need to put my course id here to go to a new route Course detail */}
+          {this.state.courses.map(course =>
+            <div key={course._id} className="grid-33"><NavLink to={`courses/${course._id}`} className="course--module course--link">
                 <h4 className="course--label">Course</h4>
                 <h3 className="course--title">{course.title}</h3>
-              </a></div>
+              </NavLink></div>
             )}  
           <div className="grid-33"><a className="course--module course--add--module" href="/courses/create">
             <h3 className="course--add--title"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 13 13" className="add">

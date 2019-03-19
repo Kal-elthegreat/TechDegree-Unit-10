@@ -3,16 +3,17 @@ import axios from 'axios';
 
 class CourseDetails extends Component {
 
+
   state= {
-    course: [],
+    course: '',
+    user:'',
     loading: true
   }
-
 
   apiGetDetails = () => {
     axios({
       method:'get',
-          url: `http://localhost:5000/api/courses`,//${id}, // how do I get selected course._id value into id?
+          url: `http://localhost:5000/api/courses/${this.props.match.params.id}`,//${id}, // how do I get selected course._id value into id?
           auth: {
             username: 'xxxxxxxxxx',
             password: 'xxxxxxxxxx'
@@ -22,6 +23,7 @@ class CourseDetails extends Component {
           console.log(response.data)
           this.setState({
             course: response.data,
+            user: response.data.user,
             loading:false
           });
         })       
@@ -35,19 +37,21 @@ class CourseDetails extends Component {
 
 
     render(){
+        const course = this.state.course
+        const user = this.state.user
         return(
         <div>
         <div className="actions--bar">
           <div className="bounds">
-            <div className="grid-100"><span><a className="button" href="/courses/:id/update">Update Course</a><a className="button" href="#">Delete Course</a></span><a className="button button-secondary" href="/">Return to List</a></div>
+            <div className="grid-100"><span><a className="button" href={`/courses/${course._id}/update`}>Update Course</a><a className="button" href="#">Delete Course</a></span><a className="button button-secondary" href="/">Return to List</a></div>
           </div>
         </div>
         <div className="bounds course--detail">
           <div className="grid-66">
             <div className="course--header">
               <h4 className="course--label">Course</h4>
-              <h3 className="course--title">Build a Basic Bookcase</h3>
-              <p>By Joe Smith</p>
+              <h3 className="course--title">{course.title}</h3>
+              <p>By {user.firstName} {user.lastName}</p>
             </div>
             <div className="course--description">
               <p>High-end furniture projects are great to dream about. But unless you have a well-equipped shop and some serious woodworking experience to draw on, it can be difficult to turn the dream into a reality.</p>
@@ -63,7 +67,7 @@ class CourseDetails extends Component {
               <ul className="course--stats--list">
                 <li className="course--stats--list--item">
                   <h4>Estimated Time</h4>
-                  <h3>14 hours</h3>
+                  <h3>{course.estimatedTime}</h3>
                 </li>
                 <li className="course--stats--list--item">
                   <h4>Materials Needed</h4>
