@@ -25,7 +25,7 @@ const authUser = (req,res,next) => {
                 err.status = 401;
                 res.status(err.status)
                 .json({message:'Access Denied: ' + err.message});
-                //next(err);
+                next(err);
             }
         } else { 
             // IF NO USER
@@ -33,7 +33,7 @@ const authUser = (req,res,next) => {
                 err.status = 401;
                 res.status(err.status)
                 .json({message:'Access Denied: ' + err.message});
-                //next(err);
+                next(err);
             }   
         })
     } else { // no creds
@@ -41,7 +41,7 @@ const authUser = (req,res,next) => {
          err.status = 401;
          res.status(err.status)
          .json({message:'Access Denied: ' + err.message});
-         //next(err);
+         next(err);
      } 
         next();     
     }; // end middleware
@@ -142,7 +142,7 @@ router.delete('/courses/:id', authUser, (req,res) => {
     req.course.remove(function(err){
         req.course.save(function(err,course){
             if (err) return next(err);
-            res.sendStatus(204)
+            //res.sendStatus(204) had to remove for DELETION to work from axios request
         });
     });
 });

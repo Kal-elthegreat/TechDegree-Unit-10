@@ -37,26 +37,21 @@ class CreateCourse extends Component {
       description: this.state.description,
       estimatedTime: this.state.estimatedTime,
       materialsNeeded: this.state.materialsNeeded
-    }
-    // this.setState({
-    //   formData: {
-    //     title: event.target.value,
-    //     description: event.target.value
-    //   }
-    // }) 
-    console.log('data here:' + course)
+    } 
+    console.log('data here:' + course.title)
 
     axios({
-      method:'post',
+      method:'POST',
       url: 'http://localhost:5000/api/courses',
+      body: course,
       auth: {
-        username: 'xxxxxxxxxx',
-        password: 'xxxxxxxxxx'
+        username: 'joe@smith.com',
+        password: 'joepassword'
       }
     })
     .then(response => {
       console.log(response)
-      console.log(response.data)
+      console.log(response.data.title)
       // this.setState({
       //   courses: response.data,
       //   loading:false

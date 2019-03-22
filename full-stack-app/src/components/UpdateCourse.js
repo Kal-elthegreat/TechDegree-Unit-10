@@ -4,10 +4,18 @@ import axios from 'axios';
 
 class UpdateCourse extends Component {
 
+  constructor() {
+      super();
+      this.handleUpdate = this.handleUpdate.bind(this);
+    }
+
     state = {
       course: "",
       user: "",
-      loading: true
+      title: "",
+      description: "",
+      estimatedTime: "",
+      materialsNeeded: ""
     }
 
     apiGetDetails = () => {
@@ -15,8 +23,8 @@ class UpdateCourse extends Component {
         method:'get',
             url: `http://localhost:5000/api/courses/${this.props.match.params.id}`,//${id}, // how do I get selected course._id value into id?
             auth: {
-              username: 'xxxxxxxxxx',
-              password: 'xxxxxxxxxx'
+              username: 'joe@smith.com',
+              password: 'joepassword'
             }
           })
           .then(response => {
@@ -24,6 +32,10 @@ class UpdateCourse extends Component {
             this.setState({
               course: response.data,
               user: response.data.user,
+              title: response.data.title,
+              description: response.data.description,
+              estimatedTime: response.data.estimatedTime,
+              materialsNeeded: response.data.materialsNeeded,
               loading:false
             });
           })       
@@ -34,6 +46,38 @@ class UpdateCourse extends Component {
         componentDidMount(){
           this.apiGetDetails();
         }
+
+    handleTitleChange = (event) => {
+      this.setState({title: event.target.value});
+      }
+    handleDescChange = (event) => {
+      this.setState({description: event.target.value});
+      }
+    handleEstChange = (event) => {
+      this.setState({estimatedTime: event.target.value});
+      }
+    handleMatsChange = (event) => {
+      this.setState({materialsNeeded: event.target.value});
+      }
+
+    handleUpdate(event) {
+      //event.preventDefault();
+      axios({
+        method:'PUT',
+        url: `http://localhost:5000/api/courses/${this.state.course._id}`,
+        auth: {
+          username: 'jsoe@smith.com',
+          password: 'joepassword'
+        }
+      })
+      .then(res => {
+        console.log(res)
+        console.log(res.data)
+      })
+      .catch(function(error){
+        console.log(error)
+      })
+  }
 
     render(){
       const course = this.state.course
@@ -46,11 +90,11 @@ class UpdateCourse extends Component {
                 <div className="grid-66">
                   <div className="course--header">
                     <h4 className="course--label">Course</h4>
-                    <div><input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..." defaultValue={course.title} /></div>
+                    <div><input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..." defaultValue={course.title} onChange= {this.handleTitleChange}/></div>
                     <p>By {user.firstName} {user.lastName}</p>
                   </div>
                   <div className="course--description">
-                    <div><textarea id="description" name="description" className="" placeholder="Course description..." defaultValue={course.description} /></div> {/* default value not showing */}
+                    <div><textarea id="description" name="description" className="" placeholder="Course description..." defaultValue={course.description} onChange= {this.handleDescChange}/></div> {/* default value not showing */}
                   </div>
                 </div>
                 <div className="grid-25 grid-right">
@@ -58,16 +102,16 @@ class UpdateCourse extends Component {
                     <ul className="course--stats--list">
                       <li className="course--stats--list--item">
                         <h4>Estimated Time</h4>
-                        <div><input id="estimatedTime" name="estimatedTime" type="text" className="course--time--input" placeholder="Hours" defaultValue={course.estimatedTime} /></div>
+                        <div><input id="estimatedTime" name="estimatedTime" type="text" className="course--time--input" placeholder="Hours" defaultValue={course.estimatedTime} onChange= {this.handleEstChange}/></div>
                       </li>
                       <li className="course--stats--list--item">
                         <h4>Materials Needed</h4>
-                        <div><textarea id="materialsNeeded" name="materialsNeeded" className placeholder="List materials..." defaultValue={"* 1/2 x 3/4 inch parting strip\n* 1 x 2 common pine\n* 1 x 4 common pine\n* 1 x 10 common pine\n* 1/4 inch thick lauan plywood\n* Finishing Nails\n* Sandpaper\n* Wood Glue\n* Wood Filler\n* Minwax Oil Based Polyurethane\n"} /></div>
+                        <div><textarea id="materialsNeeded" name="materialsNeeded" className="" placeholder="List materials..." defaultValue={"* 1/2 x 3/4 inch parting strip\n* 1 x 2 common pine\n* 1 x 4 common pine\n* 1 x 10 common pine\n* 1/4 inch thick lauan plywood\n* Finishing Nails\n* Sandpaper\n* Wood Glue\n* Wood Filler\n* Minwax Oil Based Polyurethane\n"} onChange= {this.handleMatsChange}/></div>
                       </li>
                     </ul>
                   </div>
                 </div>
-                <div className="grid-100 pad-bottom"><button className="button" type="submit">Update Course</button><button className="button button-secondary" onClick="event.preventDefault()"><NavLink to={`/courses/${course._id}`}>Cancel</NavLink></button></div> {/* need to write a POST jsx expression for clck handler*/}
+                <div className="grid-100 pad-bottom"><button onClick= {this.handleUpdate} className="button" type="submit" href={`/courses/${course._id}`}>Update Course</button><button className="button button-secondary" ><NavLink to={`/courses/${course._id}`}>Cancel</NavLink></button></div> {/* need to write a POST jsx expression for clck handler*/}
               </form>
             </div>
           </div>
@@ -79,3 +123,30 @@ class UpdateCourse extends Component {
 }
 
 export default UpdateCourse;
+//        handleTitleChange = (event) => {
+  //       this.setState({title: event.target.value});
+  //     }
+  //     handleDescriptionChange = (event) => {
+  //       this.setState({description: event.target.value});
+  //     }
+  //     handleEstimatedChange = (event) => {
+  //       this.setState({estimatedTime: event.target.value});
+  //     }
+  //     handleMaterialsChange = (event) => {
+  //       this.setState({materialsNeeded: event.target.value});
+  //     }
+
+  // handleUpdate(event) {
+  //   event.preventDefault();
+  //   console.log(
+  //     'title:' + this.state.title,
+  //     'desc:' + this.state.description,
+  //     'est:' + this.state.estimatedTime,
+  //     'mats:' + this.state.materialsNeeded,
+  //   )
+  // }
+
+  // constructor() {
+  //   super();
+  //   this.handleUpdate = this.handleUpdate.bind(this);
+  // }

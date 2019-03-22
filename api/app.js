@@ -62,6 +62,7 @@ app.use((err, req, res, next) => {
     stack: err.stack,
     error: {},
   });
+  console.log(err.stack)
 });
 
 // set our port

@@ -3,6 +3,10 @@ import axios from 'axios';
 
 class CourseDetails extends Component {
 
+  constructor() {
+    super();
+    this.handleDelete = this.handleDelete.bind(this);
+  }
 
   state= {
     course: '',
@@ -12,7 +16,7 @@ class CourseDetails extends Component {
 
   apiGetDetails = () => {
     axios({
-      method:'get',
+      method:'GET',
           url: `http://localhost:5000/api/courses/${this.props.match.params.id}`,//${id}, // how do I get selected course._id value into id?
           auth: {
             username: 'xxxxxxxxxx',
@@ -36,6 +40,28 @@ class CourseDetails extends Component {
       }
 
 
+  handleDelete(event){
+    //event.preventDefault();
+    console.log('Hello')
+
+    axios({
+      method:'DELETE',
+      url: `http://localhost:5000/api/courses/${this.state.course._id}`,
+      auth: {
+        username: 'joe@smith.com',
+        password: 'joepassword'
+      }
+    })
+    .then(res => {
+      console.log(res)
+      console.log(res.data)
+    })
+    .catch(function(error){
+      console.log(error)
+    })
+  }
+
+
     render(){
         const course = this.state.course
         const user = this.state.user
@@ -43,7 +69,7 @@ class CourseDetails extends Component {
         <div>
         <div className="actions--bar">
           <div className="bounds">
-            <div className="grid-100"><span><a className="button" href={`/courses/${course._id}/update`}>Update Course</a><a className="button" href="#">Delete Course</a></span><a className="button button-secondary" href="/">Return to List</a></div>
+            <div className="grid-100"><span><a className="button" href={`/courses/${course._id}/update`}>Update Course</a><a onClick={this.handleDelete }className="button" href="/">Delete Course</a></span><a className="button button-secondary" href="/">Return to List</a></div>
           </div>
         </div>
         <div className="bounds course--detail">
