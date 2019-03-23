@@ -43,50 +43,21 @@ class CreateCourse extends Component {
     axios({
       method:'POST',
       url: 'http://localhost:5000/api/courses',
-      body: course,
+      data: course,
       auth: {
         username: 'joe@smith.com',
         password: 'joepassword'
       }
     })
     .then(response => {
+      // response.status 201 / 500
       console.log(response)
-      console.log(response.data.title)
-      // this.setState({
-      //   courses: response.data,
-      //   loading:false
-      //});
+      window.location.href= '/'
     })       
     .catch(function(error){
       console.log(error)
     })
   }
-
-  // apiPostCourse = () =>{
-  //   axios({
-  //     method:'post',
-  //     url: 'http://localhost:5000/api/courses',
-  //     //body: data,
-  //     auth: {
-  //       username: 'xxxxxxxxxx',
-  //       password: 'xxxxxxxxxx'
-  //     }
-  //   })
-  //   .then(response => {
-  //     console.log(response.data)
-  //     this.setState({
-  //       courses: response.data,
-  //       loading:false
-  //     });
-  //   })       
-  //   .catch(function(error){
-  //     console.log(error)
-  //   })
-  // }
-  // componentDidMount(){
-  //  this.apiPostCourse();
-  // }
-
 
 
 

@@ -61,18 +61,28 @@ class UpdateCourse extends Component {
       }
 
     handleUpdate(event) {
-      //event.preventDefault();
+      console.log('clicked')
+      const course = {
+        title: this.state.title,
+        description: this.state.description,
+        estimatedTime: this.state.estimatedTime,
+        materialsNeeded: this.state.materialsNeeded
+      } 
       axios({
         method:'PUT',
         url: `http://localhost:5000/api/courses/${this.state.course._id}`,
+        data: course,
         auth: {
-          username: 'jsoe@smith.com',
+          username: 'joe@smith.com',
           password: 'joepassword'
         }
       })
       .then(res => {
         console.log(res)
-        console.log(res.data)
+        // if(res.status = 204){
+        //   window.location.href= `/courses/`;
+        //}
+        
       })
       .catch(function(error){
         console.log(error)
@@ -111,7 +121,7 @@ class UpdateCourse extends Component {
                     </ul>
                   </div>
                 </div>
-                <div className="grid-100 pad-bottom"><button onClick= {this.handleUpdate} className="button" type="submit" href={`/courses/${course._id}`}>Update Course</button><button className="button button-secondary" ><NavLink to={`/courses/${course._id}`}>Cancel</NavLink></button></div> {/* need to write a POST jsx expression for clck handler*/}
+                <div className="grid-100 pad-bottom"><button onClick= {this.handleUpdate} className="button" type="submit" href='/'>Update Course</button><button className="button button-secondary" ><NavLink to={`/courses/${course._id}`}>Cancel</NavLink></button></div> {/* need to write a POST jsx expression for clck handler*/}
               </form>
             </div>
           </div>
