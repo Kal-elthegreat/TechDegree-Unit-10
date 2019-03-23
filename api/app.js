@@ -17,7 +17,9 @@ const app = express();
 // setup morgan which gives us http request logging
 app.use(morgan('dev'));
 app.use(jsonParser());
+
 // CORS
+
 app.use(cors());
 
 var mongoose = require('mongoose');

@@ -11,7 +11,7 @@ class Courses extends Component {
 
     apiGetCourses = () => {
         axios({
-          method:'get',
+          method:'GET',
           url: 'http://localhost:5000/api/courses',
           auth: {
             username: 'xxxxxxxxxx',
@@ -19,7 +19,7 @@ class Courses extends Component {
           }
         })
         .then(response => {
-          //console.log(response.data)
+          console.log(response.data)
           this.setState({
             courses: response.data,
             loading:false

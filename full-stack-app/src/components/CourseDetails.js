@@ -17,7 +17,7 @@ class CourseDetails extends Component {
   apiGetDetails = () => {
     axios({
       method:'GET',
-          url: `http://localhost:5000/api/courses/${this.props.match.params.id}`,//${id}, // how do I get selected course._id value into id?
+          url: `http://localhost:5000/api/courses/${this.props.match.params.id}`,
           auth: {
             username: 'xxxxxxxxxx',
             password: 'xxxxxxxxxx'
