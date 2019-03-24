@@ -19,7 +19,7 @@ class Courses extends Component {
           }
         })
         .then(response => {
-          console.log(response.data)
+          //console.log(response.data)
           this.setState({
             courses: response.data,
             loading:false

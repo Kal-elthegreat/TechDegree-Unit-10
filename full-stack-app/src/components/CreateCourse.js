@@ -10,6 +10,7 @@ class CreateCourse extends Component {
   }
 
   state= {
+    user: "",
     title: "",
     description: "",
     estimatedTime: "",
@@ -33,6 +34,7 @@ class CreateCourse extends Component {
     event.preventDefault();
     console.log('state holds:' + this.state)
     const course = {
+      //user:, // need a user id to pass into 
       title: this.state.title,
       description: this.state.description,
       estimatedTime: this.state.estimatedTime,

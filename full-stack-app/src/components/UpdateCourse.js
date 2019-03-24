@@ -43,10 +43,7 @@ class UpdateCourse extends Component {
             console.log(error)
           })
         }
-        componentDidMount(){
-          this.apiGetDetails();
-        }
-
+        
     handleTitleChange = (event) => {
       this.setState({title: event.target.value});
       }
@@ -62,6 +59,7 @@ class UpdateCourse extends Component {
 
     handleUpdate(event) {
       console.log('clicked')
+      event.preventDefault();
       const course = {
         title: this.state.title,
         description: this.state.description,
@@ -78,15 +76,19 @@ class UpdateCourse extends Component {
         }
       })
       .then(res => {
-        console.log(res)
+        //console.log(res)
         // if(res.status = 204){
-        //   window.location.href= `/courses/`;
+          window.location.href= `/courses/${this.state.course._id}`
         //}
         
       })
       .catch(function(error){
         console.log(error)
       })
+  }
+
+  componentDidMount(){
+    this.apiGetDetails();
   }
 
     render(){
