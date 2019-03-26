@@ -40,10 +40,10 @@ class UserSignIn extends Component {
     .then(response => {
       // response.status 201 / 500
       console.log(response) 
-      localStorage.setItem('user', JSON.stringify(response.data));
+      localStorage.setItem('userData', JSON.stringify(response.data));
       localStorage.setItem('username', this.state.username);
       localStorage.setItem('password', this.state.password);
-      //window.location.href= '/'
+      window.location.href= '/'
     })       
     .catch(function(error){
       console.log(error)
@@ -63,7 +63,7 @@ class UserSignIn extends Component {
             <form onSubmit= {this.handleSubmit}>
               <div><input id="emailAddress" name="emailAddress" type="text" placeholder="Email Address" onChange={this.gatherUsername} /></div>
               <div><input id="password" name="password" type="password" placeholder="Password" onChange={this.gatherPassword} /></div>
-              <div className="grid-100 pad-bottom"><button className="button" type="submit">Sign In</button><button className="button button-secondary"><NavLink to='/'>Cancel</NavLink></button></div>
+              <div className="grid-100 pad-bottom"><button className="button" type="submit" >Sign In</button><button className="button button-secondary"><NavLink to='/'>Cancel</NavLink></button></div>
             </form>
           </div>
           <p>&nbsp;</p>

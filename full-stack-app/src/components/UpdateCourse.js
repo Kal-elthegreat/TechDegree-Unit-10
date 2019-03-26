@@ -24,10 +24,6 @@ class UpdateCourse extends Component {
       axios({
         method:'get',
             url: `http://localhost:5000/api/courses/${this.props.match.params.id}`
-            // auth: {
-            //   username: 'joe@smith.com',
-            //   password: 'joepassword'
-            // }
           })
           .then(response => {
             console.log(response.data)
@@ -61,7 +57,7 @@ class UpdateCourse extends Component {
       }
 
     handleUpdate(event) { // onClick submit changes
-      console.log('clicked')
+
       event.preventDefault();
 
       const course = { // data to be passed to req body
@@ -139,30 +135,3 @@ class UpdateCourse extends Component {
 }
 
 export default UpdateCourse;
-//        handleTitleChange = (event) => {
-  //       this.setState({title: event.target.value});
-  //     }
-  //     handleDescriptionChange = (event) => {
-  //       this.setState({description: event.target.value});
-  //     }
-  //     handleEstimatedChange = (event) => {
-  //       this.setState({estimatedTime: event.target.value});
-  //     }
-  //     handleMaterialsChange = (event) => {
-  //       this.setState({materialsNeeded: event.target.value});
-  //     }
-
-  // handleUpdate(event) {
-  //   event.preventDefault();
-  //   console.log(
-  //     'title:' + this.state.title,
-  //     'desc:' + this.state.description,
-  //     'est:' + this.state.estimatedTime,
-  //     'mats:' + this.state.materialsNeeded,
-  //   )
-  // }
-
-  // constructor() {
-  //   super();
-  //   this.handleUpdate = this.handleUpdate.bind(this);
-  // }

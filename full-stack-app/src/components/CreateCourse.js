@@ -39,13 +39,14 @@ class CreateCourse extends Component {
     event.preventDefault();
 
     // create var to hold user from local storage
+    const userObj = JSON.parse(localStorage.getItem('userData'))
 
-    const course = { // course data to be passed to req body
-      //user:, // need a user id to pass into 
+    const course = { // course data to be passed to req body  
       title: this.state.title,
       description: this.state.description,
       estimatedTime: this.state.estimatedTime,
-      materialsNeeded: this.state.materialsNeeded
+      materialsNeeded: this.state.materialsNeeded,
+      user: userObj._id
     } 
 
     axios({

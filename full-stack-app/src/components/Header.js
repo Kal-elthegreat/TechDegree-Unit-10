@@ -2,13 +2,14 @@ import React from 'react';
 // -- will need to display authenticated user from Courses via props
 
 const Header = (props) => {
-    if(localStorage.getItem('user')){
+    if(localStorage.getItem('userData')){
+        const userObj = JSON.parse(localStorage.getItem('userData'));
         return (
             <div>
                 <div className="header">
                 <div className="bounds">
                   <h1 className="header--logo">Courses</h1>
-                  <nav><span>Welcome Joe Smith!</span><a className="signout" href="/signout">Sign Out</a></nav>
+                  <nav><span>Welcome {userObj.firstName} {userObj.lastName}!</span><a className="signout" href="/signout">Sign Out</a></nav>
                 </div>
                 </div>
             </div>   
