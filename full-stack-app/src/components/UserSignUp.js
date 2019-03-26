@@ -61,7 +61,7 @@ class UserSignUp extends Component{
     .then(response => {
       // response.status 201 / 500
       console.log(response)
-      window.location.href= '/signin'
+      window.location.href= '/signin' // send user to login page
     })       
     .catch(function(error){
       console.log(error)

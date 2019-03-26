@@ -38,6 +38,8 @@ class CreateCourse extends Component {
 
     event.preventDefault();
 
+    // create var to hold user from local storage
+
     const course = { // course data to be passed to req body
       //user:, // need a user id to pass into 
       title: this.state.title,

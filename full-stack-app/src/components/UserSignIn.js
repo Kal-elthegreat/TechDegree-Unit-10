@@ -39,10 +39,11 @@ class UserSignIn extends Component {
     })
     .then(response => {
       // response.status 201 / 500
-      console.log(response)
-      localStorage.setItem('username', this.state.username)
-      localStorage.setItem('password', this.state.password)
-      window.location.href= '/'
+      console.log(response) 
+      localStorage.setItem('user', JSON.stringify(response.data));
+      localStorage.setItem('username', this.state.username);
+      localStorage.setItem('password', this.state.password);
+      //window.location.href= '/'
     })       
     .catch(function(error){
       console.log(error)

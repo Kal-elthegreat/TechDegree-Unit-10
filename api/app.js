@@ -19,8 +19,12 @@ app.use(morgan('dev'));
 app.use(jsonParser());
 
 // CORS
-
-app.use(cors());
+var corsOptions = {
+  allowedHeaders: ['Content-Type', 'Authorization']
+  // origin: 'http://example.com',
+  // optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+app.use(cors(corsOptions));
 
 var mongoose = require('mongoose');
 
