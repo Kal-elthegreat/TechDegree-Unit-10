@@ -4,6 +4,7 @@ import axios from 'axios';
 
 class Courses extends Component {
 
+  // hold courses to map()
     state = {
         courses: [],
         loading: true
@@ -12,14 +13,13 @@ class Courses extends Component {
     apiGetCourses = () => {
         axios({
           method:'GET',
-          url: 'http://localhost:5000/api/courses',
-          auth: {
-            username: 'xxxxxxxxxx',
-            password: 'xxxxxxxxxx'
-          }
+          url: 'http://localhost:5000/api/courses'
+          // auth: {
+          //   username: localStorage.getItem('username'),
+          //   password: localStorage.getItem('password')
+          // }
         })
         .then(response => {
-          //console.log(response.data)
           this.setState({
             courses: response.data,
             loading:false
@@ -34,7 +34,7 @@ class Courses extends Component {
       }
 
     render(){
-       //console.log(this.state.courses)
+      // map each course out
         return(
         <div className='bounds'>
           {this.state.courses.map(course =>

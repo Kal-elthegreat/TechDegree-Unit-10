@@ -3,25 +3,27 @@ import axios from 'axios';
 
 class CourseDetails extends Component {
 
+  // bind 'this'
   constructor() {
     super();
     this.handleDelete = this.handleDelete.bind(this);
   }
 
+  // course & user will store data for use in rendering
   state= {
     course: '',
     user:'',
     loading: true
   }
 
-  apiGetDetails = () => {
+  apiGetDetails = () => { // get the course by course._id
     axios({
       method:'GET',
-          url: `http://localhost:5000/api/courses/${this.props.match.params.id}`,
-          auth: {
-            username: 'xxxxxxxxxx',
-            password: 'xxxxxxxxxx'
-          }
+          url: `http://localhost:5000/api/courses/${this.props.match.params.id}`
+          // auth: {
+          //   username: 'xxxxxxxxxx',
+          //   password: 'xxxxxxxxxx'
+          // }
         })
         .then(response => {
           console.log(response.data)
@@ -40,7 +42,7 @@ class CourseDetails extends Component {
       }
 
 
-  handleDelete(event){
+  handleDelete(event){ // onClick will delete the selected course
     //event.preventDefault();
     console.log('Hello')
 
@@ -48,8 +50,8 @@ class CourseDetails extends Component {
       method:'DELETE',
       url: `http://localhost:5000/api/courses/${this.state.course._id}`,
       auth: {
-        username: 'joe@smith.com',
-        password: 'joepassword'
+        username: localStorage.getItem('username'),
+        password: localStorage.getItem('password')
       }
     })
     .then(res => {

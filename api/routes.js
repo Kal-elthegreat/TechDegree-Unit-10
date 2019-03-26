@@ -64,7 +64,7 @@ router.param("id", function(req, res,next,id){
 
     
 
-// GET USERS - working
+// GET USERS - USER Sign In
 router.get('/users',authUser, (req,res, next) => {
     /// this block replaced authUser block
     User.find({})
@@ -74,7 +74,7 @@ router.get('/users',authUser, (req,res, next) => {
     });
 });
 
-// POST USERS - working validation complete
+// POST USERS - USER Sign Up
 router.post('/users',(req,res,next) => {
     const user = new User(req.body);
     
@@ -92,7 +92,7 @@ router.post('/users',(req,res,next) => {
     });
 });
 
-// GET COURSES - working
+// GET COURSES - Courses
 router.get('/courses', (req,res,next) => {
     Course.find({},)
     .populate('user')
@@ -102,12 +102,12 @@ router.get('/courses', (req,res,next) => {
     });
 });
 
-// GET COURSES:id - working
+// GET COURSES:id - Course Details
 router.get('/courses/:id', (req,res,next) => {
     res.json(req.course)
 });
 
-// POST COURSES - working and valid
+// POST COURSES - Create Course
 router.post('/courses', authUser, (req,res,next) => {
 
     const newCourse = new Course({
@@ -129,7 +129,7 @@ router.post('/courses', authUser, (req,res,next) => {
     });
 });
 
-// PUT COURSES:id - working and valid 
+// PUT COURSES:id - Update Course 
 router.put('/courses/:id', authUser, (req,res) => {
     req.course.update(req.body, function(err){
         if(err) return res.status(400).json({errors: err.message});
@@ -137,7 +137,7 @@ router.put('/courses/:id', authUser, (req,res) => {
     });
 });
 
-// DELETE COURSES - working
+// DELETE COURSES - Course Details
 router.delete('/courses/:id', authUser, (req,res) => {
     req.course.remove(function(err){
         req.course.save(function(err,course){

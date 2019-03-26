@@ -4,11 +4,13 @@ import axios from 'axios';
 
 class CreateCourse extends Component {
 
+  // bind 'this'
   constructor() {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  // store input values
   state= {
     user: "",
     title: "",
@@ -17,6 +19,7 @@ class CreateCourse extends Component {
     materialsNeeded: ""
   }
 
+  // gather course info to update state
   handleTitleChange = (event) => {
     this.setState({title: event.target.value});
   }
@@ -30,25 +33,26 @@ class CreateCourse extends Component {
     this.setState({materialsNeeded: event.target.value});
   }
 
+  // create new course onSubmit
   handleSubmit(event){
+
     event.preventDefault();
-    console.log('state holds:' + this.state)
-    const course = {
+
+    const course = { // course data to be passed to req body
       //user:, // need a user id to pass into 
       title: this.state.title,
       description: this.state.description,
       estimatedTime: this.state.estimatedTime,
       materialsNeeded: this.state.materialsNeeded
     } 
-    console.log('data here:' + course.title)
 
     axios({
       method:'POST',
       url: 'http://localhost:5000/api/courses',
       data: course,
       auth: {
-        username: 'joe@smith.com',
-        password: 'joepassword'
+        username: localStorage.getItem('username'),
+        password: localStorage.getItem('password')
       }
     })
     .then(response => {

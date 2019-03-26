@@ -4,11 +4,13 @@ import axios from 'axios';
 
 class UpdateCourse extends Component {
 
+  // bind 'this'
   constructor() {
       super();
       this.handleUpdate = this.handleUpdate.bind(this);
     }
 
+    // will hold data from CourseDetails
     state = {
       course: "",
       user: "",
@@ -21,11 +23,11 @@ class UpdateCourse extends Component {
     apiGetDetails = () => {
       axios({
         method:'get',
-            url: `http://localhost:5000/api/courses/${this.props.match.params.id}`,//${id}, // how do I get selected course._id value into id?
-            auth: {
-              username: 'joe@smith.com',
-              password: 'joepassword'
-            }
+            url: `http://localhost:5000/api/courses/${this.props.match.params.id}`
+            // auth: {
+            //   username: 'joe@smith.com',
+            //   password: 'joepassword'
+            // }
           })
           .then(response => {
             console.log(response.data)
@@ -43,7 +45,8 @@ class UpdateCourse extends Component {
             console.log(error)
           })
         }
-        
+     
+    // handle changes in textarea/input    
     handleTitleChange = (event) => {
       this.setState({title: event.target.value});
       }
@@ -57,10 +60,11 @@ class UpdateCourse extends Component {
       this.setState({materialsNeeded: event.target.value});
       }
 
-    handleUpdate(event) {
+    handleUpdate(event) { // onClick submit changes
       console.log('clicked')
       event.preventDefault();
-      const course = {
+
+      const course = { // data to be passed to req body
         title: this.state.title,
         description: this.state.description,
         estimatedTime: this.state.estimatedTime,
@@ -71,14 +75,14 @@ class UpdateCourse extends Component {
         url: `http://localhost:5000/api/courses/${this.state.course._id}`,
         data: course,
         auth: {
-          username: 'joe@smith.com',
-          password: 'joepassword'
+          username: localStorage.getItem('username'),
+          password: localStorage.getItem('password')
         }
       })
       .then(res => {
         //console.log(res)
         // if(res.status = 204){
-          window.location.href= `/courses/${this.state.course._id}`
+          window.location.href= `/courses/${this.state.course._id}` // return to updated CourseDetails
         //}
         
       })
