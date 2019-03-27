@@ -4,7 +4,6 @@ import {
   Switch,
   Route
 }  from 'react-router-dom';
-//import axios from 'axios';
 import './App.css';
 
 // App Components
@@ -15,6 +14,7 @@ import CreateCourse from './components/CreateCourse';
 import UpdateCourse from './components/UpdateCourse';
 import UserSignIn from './components/UserSignIn';
 import UserSignUp from './components/UserSignUp';
+import SignOut from './components/SignOut';
 
 class App extends Component {
 
@@ -40,6 +40,8 @@ class App extends Component {
         <Route path='/signin' render={() => <UserSignIn />}/>
         {/* User Sign Up */}
         <Route path= '/signup' render={() => <UserSignUp />} />
+        {/* SignOut */}
+        <Route path= '/signout' render={() => <SignOut />} />
       </Switch>
       </div>
       </BrowserRouter>

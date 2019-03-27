@@ -106,7 +106,7 @@ class UpdateCourse extends Component {
                     <p>By {user.firstName} {user.lastName}</p>
                   </div>
                   <div className="course--description">
-                    <div><textarea id="description" name="description" className="" placeholder="Course description..." defaultValue={course.description} onChange= {this.handleDescChange}/></div> {/* default value not showing */}
+                    <div><textarea id="description" name="description" className="" placeholder="Course description..." value={this.state.description} onChange= {this.handleDescChange}/></div> {/* default value not showing */}
                   </div>
                 </div>
                 <div className="grid-25 grid-right">
@@ -118,7 +118,7 @@ class UpdateCourse extends Component {
                       </li>
                       <li className="course--stats--list--item">
                         <h4>Materials Needed</h4>
-                        <div><textarea id="materialsNeeded" name="materialsNeeded" className="" placeholder="List materials..." defaultValue={"* 1/2 x 3/4 inch parting strip\n* 1 x 2 common pine\n* 1 x 4 common pine\n* 1 x 10 common pine\n* 1/4 inch thick lauan plywood\n* Finishing Nails\n* Sandpaper\n* Wood Glue\n* Wood Filler\n* Minwax Oil Based Polyurethane\n"} onChange= {this.handleMatsChange}/></div>
+                        <div><textarea id="materialsNeeded" name="materialsNeeded" className="" placeholder="List materials..." value={this.state.materialsNeeded} onChange= {this.handleMatsChange}/></div>
                       </li>
                     </ul>
                   </div>

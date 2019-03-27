@@ -2,6 +2,7 @@ import React from 'react';
 // -- will need to display authenticated user from Courses via props
 
 const Header = (props) => {
+    // if logged in
     if(localStorage.getItem('userData')){
         const userObj = JSON.parse(localStorage.getItem('userData'));
         return (

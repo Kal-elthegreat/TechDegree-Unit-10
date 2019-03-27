@@ -28,7 +28,7 @@ var Schema = mongoose.Schema;
 
 
     var CourseSchema = new Schema ({
-        user: { type: Schema.Types.ObjectId, ref: 'User' }, // issue could lie here??
+        user: { type: Schema.Types.ObjectId, ref: 'User' }, 
         title:{
             type: String,
             required: [true, 'Please enter a title']

@@ -59,7 +59,7 @@ class UserSignUp extends Component{
       data: user
     })
     .then(response => {
-      if(response.status == 201){
+      if(response.status === 201){
       console.log(response)
       window.location.href= '/signin' // send user to login page
       }  

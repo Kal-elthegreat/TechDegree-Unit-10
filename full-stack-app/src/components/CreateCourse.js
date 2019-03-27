@@ -58,10 +58,13 @@ class CreateCourse extends Component {
         password: localStorage.getItem('password')
       }
     })
-    .then(response => {
-      // response.status 201 / 500
-      console.log(response)
-      window.location.href= '/'
+    .then(res => {
+      if(res.status === 201){
+        console.log(res)
+        window.location.href= '/'
+      } else {
+        console.log(res)
+      }
     })       
     .catch(function(error){
       console.log(error)
@@ -72,11 +75,14 @@ class CreateCourse extends Component {
 
 
     render(){
+      const userObj = JSON.parse(localStorage.getItem('userData')); // to display user name on page
+
+      // if something display errors
+      if(true){
         return(
-            <div className="bounds course--detail">
+      <div className="bounds course--detail">
         <h1>Create Course</h1>
         <div>
-        {/* renders IF error occurs, onSubmit
           <div>
             <h2 className="validation--errors--label">Validation errors</h2>
             <div className="validation-errors">
@@ -86,13 +92,12 @@ class CreateCourse extends Component {
               </ul>
             </div>
           </div>
-          */}
           <form onSubmit={this.handleSubmit}>
             <div className="grid-66">
               <div className="course--header">
                 <h4 className="course--label">Course</h4>
                 <div><input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..." onChange={this.handleTitleChange}/></div>
-                <p>By Joe Smith</p>
+                <p>By {userObj.firstName} {userObj.lastName}</p>
               </div>
               <div className="course--description">
                 <div><textarea id="description" name="description" placeholder="Course description..." onChange= {this.handleDescriptionChange}/></div>
@@ -117,7 +122,43 @@ class CreateCourse extends Component {
         </div>
       </div>
         )
+      } else {
+        return(
+          <div className="bounds course--detail">
+      <h1>Create Course</h1>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <div className="grid-66">
+            <div className="course--header">
+              <h4 className="course--label">Course</h4>
+              <div><input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..." onChange={this.handleTitleChange}/></div>
+              <p>By {userObj.firstName} {userObj.lastName}</p>
+            </div>
+            <div className="course--description">
+              <div><textarea id="description" name="description" placeholder="Course description..." onChange= {this.handleDescriptionChange}/></div>
+            </div>
+          </div>
+          <div className="grid-25 grid-right">
+            <div className="course--stats">
+              <ul className="course--stats--list">
+                <li className="course--stats--list--item">
+                  <h4>Estimated Time</h4>
+                  <div><input id="estimatedTime" name="estimatedTime" type="text" className="course--time--input" placeholder="Hours" onChange= {this.handleEstimatedChange}/></div>
+                </li>
+                <li className="course--stats--list--item">
+                  <h4>Materials Needed</h4>
+                  <div><textarea id="materialsNeeded" name="materialsNeeded" placeholder="List materials..." onChange= {this.handleMaterialsChange}/></div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="grid-100 pad-bottom"><button className="button" type="submit">Create Course</button><button className="button button-secondary" ><NavLink to='/'>Cancel</NavLink></button></div>
+        </form>
+      </div>
+    </div>
+      )
     }
+  }
 }
 
 
