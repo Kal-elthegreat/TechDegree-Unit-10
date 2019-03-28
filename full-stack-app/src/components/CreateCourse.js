@@ -5,8 +5,8 @@ import axios from 'axios';
 class CreateCourse extends Component {
 
   // bind 'this'
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -16,7 +16,9 @@ class CreateCourse extends Component {
     title: "",
     description: "",
     estimatedTime: "",
-    materialsNeeded: ""
+    materialsNeeded: "",
+    validationError: false,
+    error: ""
   }
 
   // gather course info to update state
@@ -58,17 +60,16 @@ class CreateCourse extends Component {
         password: localStorage.getItem('password')
       }
     })
-    .then(res => {
-      if(res.status === 201){
-        console.log(res)
-        window.location.href= '/'
-      } else {
-        console.log(res)
-      }
+    .then(response => {
+        window.location.href= '/' 
     })       
     .catch(function(error){
-      console.log(error)
-    })
+      if(error.response){
+        // console.log(error.response.data);
+        // console.log(error.response.status);
+        this.setState({validationError: true})
+      }
+    }.bind(this))
   }
 
 
@@ -77,8 +78,8 @@ class CreateCourse extends Component {
     render(){
       const userObj = JSON.parse(localStorage.getItem('userData')); // to display user name on page
 
-      // if something display errors
-      if(true){
+      // if error display validation errors
+      if(this.state.validationError){
         return(
       <div className="bounds course--detail">
         <h1>Create Course</h1>

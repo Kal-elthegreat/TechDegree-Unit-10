@@ -69,8 +69,8 @@ class CourseDetails extends Component {
         const course = this.state.course
         const user = this.state.user
         const userObj = JSON.parse(localStorage.getItem('userData'));
-        if(localStorage.getItem('userData') && userObj._id === user._id){
-          // if user logged-in and id matches user id of course 
+        // if user logged-in and id matches user id of course
+        if(localStorage.getItem('userData') && userObj._id === user._id){ 
           return(
             <div>
             <div className="actions--bar">
