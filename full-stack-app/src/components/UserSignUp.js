@@ -48,10 +48,10 @@ class UserSignUp extends Component{
 
     event.preventDefault();
 
-    if(this.state.matchPassword === true){
-      event.preventDefault();
+    if(this.state.matchPassword !== true){
       alert('Passwords do not match');
-    }
+    } 
+    else {
 
     const user= { // create user data to pass to req body
       firstName: this.state.firstName,
@@ -79,8 +79,8 @@ class UserSignUp extends Component{
       }
       alert(this.state.errorMessage);
     }.bind(this)) // binds 'this' in order to setState
-
   }
+}
 
 
     render(){ 
