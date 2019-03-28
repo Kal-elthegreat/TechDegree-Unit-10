@@ -16,7 +16,9 @@ class UserSignUp extends Component{
     firstName: "",
     lastName: "",
     emailAddress: "",
-    password: ""
+    password: "",
+    errorMessage: "",
+    matchPassword: false
   }
 
   // gather user info from inputs
@@ -36,15 +38,20 @@ class UserSignUp extends Component{
   // make sure passwords are identical
   passwordMatch = (event) =>{
     if(event.target.value === this.state.password){
-      console.log(true)
-    } else {
-      console.log(false)
-    }
+      this.setState({
+        matchPassword: true
+      })
+    } 
   }
 
   handleSubmit(event){ // create user onSubmit
 
     event.preventDefault();
+
+    if(this.state.matchPassword === true){
+      event.preventDefault();
+      alert('Passwords do not match');
+    }
 
     const user= { // create user data to pass to req body
       firstName: this.state.firstName,
@@ -65,8 +72,14 @@ class UserSignUp extends Component{
       }  
     })       
     .catch(function(error){
-      console.log(error)
-    })
+      if(error.response){
+        this.setState({
+          errorMessage: error.response.data.error
+        })
+      }
+      alert(this.state.errorMessage);
+    }.bind(this)) // binds 'this' in order to setState
+
   }
 
 

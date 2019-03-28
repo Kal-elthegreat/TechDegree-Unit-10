@@ -69,7 +69,7 @@ class CreateCourse extends Component {
         // console.log(error.response.status);
         this.setState({validationError: true})
       }
-    }.bind(this))
+    }.bind(this)) // binds 'this' in order to setState
   }
 
 

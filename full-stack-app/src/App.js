@@ -15,6 +15,7 @@ import UpdateCourse from './components/UpdateCourse';
 import UserSignIn from './components/UserSignIn';
 import UserSignUp from './components/UserSignUp';
 import SignOut from './components/SignOut';
+import PrivateRoute from './components/PrivateRoute';
 
 class App extends Component {
 
@@ -30,10 +31,11 @@ class App extends Component {
       <Switch>
         {/* All courses */}
         <Route exact path= '/' render={() => <Courses/>}/>
-        {/* Create Course */}
-       <Route path= '/courses/create' render={() => <CreateCourse/>}/>
-       {/* Update Course */}
-       <Route path= '/courses/:id/update' component= {UpdateCourse}/>
+        
+        {/* Private routes for auth Users */}
+        <PrivateRoute path= '/courses/create' component= {CreateCourse}/>
+        <PrivateRoute path= '/courses/:id/update' component= {UpdateCourse}/>
+
         {/* Course Details */}
        <Route path= '/courses/:id' component= {CourseDetails}/> 
         {/* User Sign In */}
