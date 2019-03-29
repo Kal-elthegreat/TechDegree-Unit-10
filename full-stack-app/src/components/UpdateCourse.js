@@ -17,16 +17,17 @@ class UpdateCourse extends Component {
       title: "",
       description: "",
       estimatedTime: "",
-      materialsNeeded: ""
+      materialsNeeded: "",
+      errorMessage:""
     }
-
+    // GETS CourseDetails data and displays on UpdateCourse
     apiGetDetails = () => {
       axios({
         method:'get',
             url: `http://localhost:5000/api/courses/${this.props.match.params.id}`
           })
           .then(response => {
-            console.log(response.data)
+            //console.log(response.data)
             this.setState({
               course: response.data,
               user: response.data.user,
@@ -83,8 +84,11 @@ class UpdateCourse extends Component {
         
       })
       .catch(function(error){
-        console.log(error)
-      })
+          if(error.response){
+            this.setState({ errorMessage: error.response.data.errors});
+            }
+          alert(this.state.errorMessage); // alert user
+      }.bind(this)) // bind 'this'
   }
 
   componentDidMount(){

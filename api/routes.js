@@ -131,7 +131,7 @@ router.post('/courses', authUser, (req,res,next) => {
 
 // PUT COURSES:id - Update Course 
 router.put('/courses/:id', authUser, (req,res) => {
-    req.course.update(req.body, function(err){
+    req.course.update(req.body, { runValidators: true}, function(err){
         if(err) return res.status(400).json({errors: err.message});
         res.sendStatus(204);
     });

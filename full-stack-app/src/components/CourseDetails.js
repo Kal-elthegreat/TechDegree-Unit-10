@@ -135,7 +135,7 @@ class CourseDetails extends Component {
                     <li className="course--stats--list--item">
                       <h4>Materials Needed</h4>
                       <ul>
-                      <ReactMarkdown source= {course.materialslNeeded} />
+                      <ReactMarkdown>{course.materialsNeeded}</ReactMarkdown>
                       </ul>
                     </li>
                   </ul>
