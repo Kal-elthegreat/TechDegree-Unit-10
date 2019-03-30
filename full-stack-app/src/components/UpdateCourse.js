@@ -87,7 +87,7 @@ class UpdateCourse extends Component {
           if(error.response){
             this.setState({ errorMessage: error.response.data.errors});
             }
-          alert(this.state.errorMessage); // alert user
+          //alert(this.state.errorMessage); // alert user
       }.bind(this)) // bind 'this'
   }
 
@@ -100,6 +100,7 @@ class UpdateCourse extends Component {
         const user = this.state.user
         return(
           <div className="bounds course--detail">
+          <div>{this.state.errorMessage && this.state.errorMessage}</div>
             <h1>Update Course</h1>
             <div>
               <form>

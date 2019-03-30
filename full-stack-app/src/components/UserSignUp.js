@@ -18,7 +18,8 @@ class UserSignUp extends Component{
     emailAddress: "",
     password: "",
     errorMessage: "",
-    matchPassword: false
+    matchPassword: false,
+    passwordError: ""
   }
 
   // gather user info from inputs
@@ -49,7 +50,8 @@ class UserSignUp extends Component{
     event.preventDefault();
 
     if(this.state.matchPassword !== true){
-      alert('Passwords do not match');
+      //alert('Passwords do not match');
+      this.setState({passwordError: "Passwords do not match"})
     } 
     else {
 
@@ -77,7 +79,7 @@ class UserSignUp extends Component{
           errorMessage: error.response.data.error
         })
       }
-      alert(this.state.errorMessage);
+      //alert(this.state.errorMessage);
     }.bind(this)) // binds 'this' in order to setState
   }
 }
@@ -87,6 +89,7 @@ class UserSignUp extends Component{
         return(
         <div className="bounds">
         <div className="grid-33 centered signin">
+        <div>{this.state.errorMessage && this.state.errorMessage}{this.state.passwordError}</div>
           <h1>Sign Up</h1>
           <div>
             <form onSubmit={this.handleSubmit}>
