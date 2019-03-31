@@ -17,6 +17,7 @@ import UserSignUp from './components/UserSignUp';
 import SignOut from './components/SignOut';
 import PrivateRoute from './components/PrivateRoute';
 
+// Main Component
 class App extends Component {
 
   state = {
